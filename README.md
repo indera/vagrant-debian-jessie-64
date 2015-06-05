@@ -58,6 +58,6 @@ end
 
 # Hosting
 
-Git fails because the size is more than 100MB
+GitHub does not allow to store the produced file because the size is more than 100MB
 
 https://help.github.com/articles/configuring-git-large-file-storage/
