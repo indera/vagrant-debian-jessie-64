@@ -54,3 +54,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 end
 ```
+
+
+# Hosting
+
+Git fails because the size is more than 100MB
+
+https://help.github.com/articles/configuring-git-large-file-storage/
