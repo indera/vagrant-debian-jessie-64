@@ -5,42 +5,39 @@ This bix was created to experiment with jessie release.
 ## Steps
 
 * Download jessie iso
-<pre>
+```shell
 $ wget http://cdimage.debian.org/debian-cd/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso
 $ sha1sum debian-8.0.0-amd64-netinst.iso
 ==>  eab72f4ba73adea580aeaec91649e846aac89fa9  debian-8.0.0-amd64-netinst.iso
-</pre>
+```
 
 * Clone the magic repo that lnows how to create *.box files
-<pre>
+```shell
 $ git clone git@github.com:dotzero/vagrant-debian-jessie-64.git
 $ mkdir vagrant-debian-jessie-64/iso
 $ mv ../debian-8.0.0-amd64-netinst.iso iso/
 $ brew install cdrtools
 $ brew install p7zip
 $ ./build.sh
-
 ...wait ~10 min
 ==> debian-jessie: Exporting VM...
 ==> debian-jessie: Compressing package to: /Users/asura/jessie/vagrant-debian-jessie-64/debian-jessie.box
-</pre>
+```
 
 * Verify what we got
-<pre>
+```shell
 $ du -hcs debian-jessie.box
 ==> 516M    debian-jessie.box
-
 $ sha1sum debian-jessie.box
 ==> 50df5b2cdfc31bbbcb356f1cd7f2d041fdd17589  debian-jessie.box
-</pre>
+```
 
 * Add it to the list of available images
-<pre>
+```shell
 $ vagrant box add "debian-jessie" debian-jessie.box
-</pre>
+```
 
 * Use it in a Vagrantfile
-
 ```ruby
 VAGRANTFILE_API_VERSION = "2"
 
