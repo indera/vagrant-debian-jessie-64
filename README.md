@@ -6,10 +6,8 @@ This bix was created to experiment with jessie release.
 
 * Download jessie iso
 <pre>
-
 $ wget http://cdimage.debian.org/debian-cd/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso
 $ sha1sum debian-8.0.0-amd64-netinst.iso
-
 ==>  eab72f4ba73adea580aeaec91649e846aac89fa9  debian-8.0.0-amd64-netinst.iso
 </pre>
 
@@ -27,7 +25,6 @@ $ ./build.sh
 ==> debian-jessie: Compressing package to: /Users/asura/jessie/vagrant-debian-jessie-64/debian-jessie.box
 </pre>
 
-
 * Verify what we got
 <pre>
 $ du -hcs debian-jessie.box
@@ -44,7 +41,7 @@ $ vagrant box add "debian-jessie" debian-jessie.box
 
 * Use it in a Vagrantfile
 
-<pre>
+```ruby
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -59,4 +56,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.path = "bootstrap.sh"
   end
 end
-</pre>
+```
