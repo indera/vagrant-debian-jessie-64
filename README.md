@@ -1,2 +1,65 @@
 # vagrant-debian-jessie-64
-Created using http://cdimage.debian.org/debian-cd/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso and git@github.com:dotzero/vagrant-debian-jessie-64.git
+
+This bix was created to experiment with jessie release.
+
+## Steps
+
+* Download jessie iso
+<pre>
+
+$ wget http://cdimage.debian.org/debian-cd/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso
+$ sha1sum debian-8.0.0-amd64-netinst.iso
+
+==>  eab72f4ba73adea580aeaec91649e846aac89fa9  debian-8.0.0-amd64-netinst.iso
+</pre>
+
+* Clone the magic repo that lnows how to create *.box files
+<pre>
+$ git clone git@github.com:dotzero/vagrant-debian-jessie-64.git
+$ mkdir vagrant-debian-jessie-64/iso
+$ mv ../debian-8.0.0-amd64-netinst.iso iso/
+$ brew install cdrtools
+$ brew install p7zip
+$ ./build.sh
+
+...wait ~10 min
+==> debian-jessie: Exporting VM...
+==> debian-jessie: Compressing package to: /Users/asura/jessie/vagrant-debian-jessie-64/debian-jessie.box
+</pre>
+
+
+* Verify what we got
+<pre>
+$ du -hcs debian-jessie.box
+==> 516M    debian-jessie.box
+
+$ sha1sum debian-jessie.box
+==> 50df5b2cdfc31bbbcb356f1cd7f2d041fdd17589  debian-jessie.box
+</pre>
+
+* Add it to the list of available images
+<pre>
+vagrant box add "debian-jessie" debian-jessie.box
+</pre>
+
+* Use it in a Vagrantfile
+<pre>
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # config.vm.box = "puphpet/debian75-x64"
+  config.vm.box = "debian-jessie"
+  config.vm.hostname = "redi-dropper-client"
+  config.vm.synced_folder "../app", "/var/www/app"
+  config.vm.network "forwarded_port", guest: 80, host: 8088
+  config.vm.network :forwarded_port, guest: 443, host: 7088
+
+  config.vm.provision "shell" do |s|
+    s.path = "bootstrap.sh"
+  end
+end
+</pre>
