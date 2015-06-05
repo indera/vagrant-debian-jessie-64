@@ -39,15 +39,12 @@ $ sha1sum debian-jessie.box
 
 * Add it to the list of available images
 <pre>
-vagrant box add "debian-jessie" debian-jessie.box
+$ vagrant box add "debian-jessie" debian-jessie.box
 </pre>
 
 * Use it in a Vagrantfile
-<pre>
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+<pre>
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
